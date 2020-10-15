@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include <QDebug>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -8,6 +10,17 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     proxyModel = new QSortFilterProxyModel;
+
+    ui->sourceView->setRootIsDecorated(false);
+    ui->sourceView->setAlternatingRowColors(true);
+
+    ui->treeView->setRootIsDecorated(false);
+    ui->treeView->setAlternatingRowColors(true);
+    ui->treeView->setModel(proxyModel);
+    ui->treeView->setSortingEnabled(true);
+
+    connect(ui->lineEdit, &QLineEdit::textChanged,
+            this, &MainWindow::filterRegExpChanged);
 }
 
 MainWindow::~MainWindow()
@@ -18,6 +31,15 @@ MainWindow::~MainWindow()
 void MainWindow::setSourceModel(QAbstractItemModel *model)
 {
     proxyModel->setSourceModel(model);
-//     ->setModel(model);
-    ui->treeView->setModel(model);
+    ui->sourceView->setModel(model);
+}
+
+void MainWindow::filterRegExpChanged() {
+    QRegExp::PatternSyntax syntax = QRegExp::FixedString;
+
+    Qt::CaseSensitivity caseSen = Qt::CaseSensitivity(0);
+    QString text = ui->lineEdit->text();
+
+    QRegExp regExp(text, caseSen, syntax);
+    proxyModel->setFilterRegExp(regExp);
 }

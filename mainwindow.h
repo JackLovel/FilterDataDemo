@@ -2,14 +2,11 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-class QAbstractItemModel;
-class QCheckBox;
-class QComboBox;
-class QGroupBox;
-class QLabel;
-class QLineEdit;
+#include <QAbstractItemModel>
+
+#include <QLineEdit>
 #include <QSortFilterProxyModel>
-class QTreeView;
+#include <QTreeView>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -24,6 +21,9 @@ public:
     ~MainWindow();
 
     void setSourceModel(QAbstractItemModel *model);
+
+public slots:
+    void filterRegExpChanged();
 
 private:
     Ui::MainWindow *ui;
