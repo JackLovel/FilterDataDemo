@@ -11,6 +11,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     proxyModel = new QSortFilterProxyModel;
 
+    ui->lineEdit->setPlaceholderText("输入...");
+
     ui->sourceView->setRootIsDecorated(false);
     ui->sourceView->setAlternatingRowColors(true);
 

@@ -15,7 +15,7 @@ QAbstractItemModel *createMailModel(QObject *parent)
 {
     QStandardItemModel *model = new QStandardItemModel(0, 1, parent);
 
-    model->setHeaderData(0, Qt::Horizontal, "Name");
+    model->setHeaderData(0, Qt::Horizontal, "姓名");
 
     addMail(model, "li hong");
     addMail(model, "wang gang");
@@ -29,5 +29,6 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.setSourceModel(createMailModel(&w));
     w.show();
+    w.setWindowTitle("信息过滤");
     return a.exec();
 }
