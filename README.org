@@ -1,0 +1,5 @@
+* 介绍
+用于数据的过滤显示 
+
+* 参考
+官方的例子《Basic Sort/Filter Model Example》
